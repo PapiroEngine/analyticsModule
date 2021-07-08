@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!--
+    <div class="container">
+      <h1>About the project</h1>
+      <p> 
+
+        {% for name in names %}
+          {{ name }}<br/>
+        {% endfor %}
+
+      </p>
+    </div>
+    -->
+    <main class="mt-5 pt-3">
+       <div>
+        <iframe class="responsive-iframe" src="dashboardOrigin" height="590px" width="100%"></iframe>
+      </div>
+      <table class="table">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Correct Ending</th>
+            <th scope="col">Form Answer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Aline</td>
+            <td>Yes</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Ana</td>
+            <td>Yes</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Bruno</td>
+            <td>No</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <td>Carina</td>
+            <td>Yes</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <th scope="row">5</th>
+            <td>David</td>
+            <td>No</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <th scope="row">6</th>
+            <td>Denis</td>
+            <td>Yes</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <th scope="row">7</th>
+            <td>Mariana</td>
+            <td>Yes</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <th scope="row">8</th>
+            <td>Marina</td>
+            <td>Yes</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <th scope="row">9</th>
+            <td>Otávio</td>
+            <td>No</td>
+            <td>2</td>
+          </tr>
+        </tbody>
+      </table>
+      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    </main>
+    
+
+{% endblock %}
