@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 create_dash_app(app)
 
-@app.route('/login')
+@app.route('/')
 def login():
 	return render_template("login.html")
 
