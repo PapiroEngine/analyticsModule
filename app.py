@@ -41,12 +41,12 @@ mycol = mydb["Questionnaire_Templates"]
 auth_token = "LDhkmZP2tkXBTmrB4TNjKQQtXftJBJT337YZVumerK4ensx6Z4afxLy3kuQPJZGFEqW7jnLNYJFYKefbWUhp24MtzGa5T2fDg3Nvnp3DfPXhc27cW7kXZQ3SpJ2XGMxv"
 
 class Teste(Resource):
-    def get(self, auth, questType):
+    def get(self, questType, auth):
         if auth != auth_token:
-            return false
+            return False
         else:
-            a = mycol.find({"QType": questType },{"_id": 0})
+            a = mycol.find({"CreatorID": questType },{"_id": 0})
             b = list(a)
             return dumps(b)
 
-api.add_resource(Teste, '/questionnaires/templates/<auth>/<questType>')
+api.add_resource(Teste, '/questionnaires/templates/<questType>/<auth>')
