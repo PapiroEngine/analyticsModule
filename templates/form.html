@@ -3,18 +3,40 @@
 
 {% block content %}
 
+	<script>
+		function createDiv() {
+			let div = document.createElement('div');
+			div.innerText = document.getElementById("demo").innerText;
+			document.body.appendChild(button);
+		}
+	</script>
+
     <div class="container">
-      	<h1>Segue o forms abaixo</h1>
+		<br/><br/><br/>
+      	<h3>Questionnaire Creation</h3>
+		  <p id="demo" onclick="createDiv()">Click me.</p>
 	    <form action="/thankyou" method="POST">
-		  <div class="mb-3">
-		    <label for="exampleInputEmail1" class="form-label">Email address</label>
-		    <input type="email" class="form-control" id="exampleInputEmail1" name="testeemail" aria-describedby="emailHelp">
-		    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-		  </div>
-		  <div class="mb-3">
-		    <label for="exampleInputPassword1" class="form-label">Password</label>
-		    <input type="text" class="form-control" id="exampleInputPassword1" name="senha">
-		  </div>
+			<div class="mb-1">
+				<label for="questName" class="form-label">Questionnaire Name</label>
+				<input type="text" class="form-control" id="questionnaireName" name="questname">
+				<div id="questNameInfo" class="form-text">That's the name you will see while chosing a questionnaire to your created game.</div>
+			</div>
+		  <br/><br/>
+		  <h5>Questions and Answers</h5>
+		  	<div id="wrapper">
+				<div class="question">
+					<div class="mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">1</span>
+							</div>
+							<input type="text" class="form-control" placeholder="Question"/>
+							<input type="text" class="form-control" placeholder="Answer"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		  <br/><br/>
 		  <div class="mb-3 form-check">
 		    <input type="checkbox" class="form-check-input" id="exampleCheck1">
 		    <label class="form-check-label" for="exampleCheck1">Check me out</label>
@@ -22,5 +44,6 @@
 		  <button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
+	
 
 {% endblock %}

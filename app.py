@@ -1,9 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from dash_app import create_dash_app
 from flask_restful import Resource, Api
 import pandas as pd
 import pymongo
 from bson.json_util import dumps
+import redis
+import time
+import asyncio
+import asyncio_redis
 
 app = Flask(__name__)
 api = Api(app)
@@ -45,8 +49,9 @@ class Teste(Resource):
         if auth != auth_token:
             return False
         else:
-            a = mycol.find({"CreatorID": questType },{"_id": 0})
-            b = list(a)
-            return dumps(b)
+            a = mycol.find({"$or":[{"Creator_Id":questType}, {"Creator_Id":"Template"}]},{"_id": 0})
+            b = jsonify(list(a))
+            b.headers.add("Access-Control-Allow-Origin", "*")
+            return b
 
 api.add_resource(Teste, '/questionnaires/templates/<questType>/<auth>')
