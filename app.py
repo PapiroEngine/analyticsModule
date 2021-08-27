@@ -4,10 +4,10 @@ from flask_restful import Resource, Api
 import pandas as pd
 import pymongo
 from bson.json_util import dumps
-import redis
+""" import redis
 import time
 import asyncio
-import asyncio_redis
+import asyncio_redis """
 
 app = Flask(__name__)
 api = Api(app)
