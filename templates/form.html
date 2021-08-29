@@ -4,20 +4,21 @@
 {% block content %}
 
 	<script>
+		var clicks = 1;
 		function add() {
-			/* Create element; can be whatever you want, e. g. div, h1, p, img...
-			var div = document.createElement('div');
-			
-			// Set some attributes
-			div.style.width = '200px';
-			div.style.height = '200px';
-			div.style.backgroundColor = 'red';
-			
-			// Append the div to the body
-			document.body.appendChild(div);*/
-			var myDiv = document.getElementById("question");
-			var divClone = myDiv.cloneNode(true);
-			document.getElementById("wrapper").appendChild(divClone); 
+			clicks += 1;
+			newId1 = `Question_${clicks}`;
+			newId2 = `Number_${clicks}`;
+			/*var $myDiv = document.getElementById("question");
+			var $divClone = $myDiv.cloneNode(true);
+			document.getElementById("wrapper").appendChild($divClone); 
+			document.getElementById("clicks").innerHTML = newId;*/
+			//clone.find("#select").attr("id","select-"+length);
+			//$("#Question_1").clone().prop("id", newId).appendTo("#wrapper");
+			var clone = $("#Question_1").clone().prop("id", newId1);
+			var detail = clone.find("#quest_number_").attr("id", newId2);
+			clone.appendTo("#wrapper");
+			document.getElementById(newId2).innerHTML = clicks;
 		}
 	</script>
 
@@ -34,17 +35,18 @@
 		  <br/><br/>
 		  <h5>Questions and Answers</h5>
 		  	<div id="wrapper">
-				<div id="question">
+				<div id="Question_1">
 					<div class="mb-3">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon1">1</span>
+								<span class="input-group-text" id="quest_number_">1</span>
 							</div>
 							<input type="text" class="form-control" placeholder="Question"/>
 							<input type="text" class="form-control" placeholder="Answer"/>
 						</div>
 					</div>
 				</div>
+				<p>Clicks: <a id="clicks">0</a></p>
 			</div>
 		  <br/><br/>
 		  <div class="mb-3 form-check">
