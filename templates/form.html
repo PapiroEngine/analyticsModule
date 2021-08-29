@@ -4,17 +4,27 @@
 {% block content %}
 
 	<script>
-		function createDiv() {
-			let div = document.createElement('div');
-			div.innerText = document.getElementById("demo").innerText;
-			document.body.appendChild(button);
+		function add() {
+			/* Create element; can be whatever you want, e. g. div, h1, p, img...
+			var div = document.createElement('div');
+			
+			// Set some attributes
+			div.style.width = '200px';
+			div.style.height = '200px';
+			div.style.backgroundColor = 'red';
+			
+			// Append the div to the body
+			document.body.appendChild(div);*/
+			var myDiv = document.getElementById("question");
+			var divClone = myDiv.cloneNode(true);
+			document.getElementById("wrapper").appendChild(divClone); 
 		}
 	</script>
 
     <div class="container">
 		<br/><br/><br/>
       	<h3>Questionnaire Creation</h3>
-		  <p id="demo" onclick="createDiv()">Click me.</p>
+		  <button onclick="add()">Add div</button>
 	    <form action="/thankyou" method="POST">
 			<div class="mb-1">
 				<label for="questName" class="form-label">Questionnaire Name</label>
@@ -24,7 +34,7 @@
 		  <br/><br/>
 		  <h5>Questions and Answers</h5>
 		  	<div id="wrapper">
-				<div class="question">
+				<div id="question">
 					<div class="mb-3">
 						<div class="input-group">
 							<div class="input-group-prepend">
@@ -44,6 +54,7 @@
 		  <button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
+	
 	
 
 {% endblock %}
