@@ -2,9 +2,8 @@
 {% block title %}Formulário Guess18{% endblock %}
 
 {% block content %}
-
 	<script>
-		var clicks = 1;
+		var clicks = 0;
 		function add() {
 			clicks += 1;
 			newId1 = `Question_${clicks}`;
@@ -15,7 +14,23 @@
 			document.getElementById("clicks").innerHTML = newId;*/
 			//clone.find("#select").attr("id","select-"+length);
 			//$("#Question_1").clone().prop("id", newId).appendTo("#wrapper");
-			var clone = $("#Question_1").clone().prop("id", newId1);
+			var clone = $("#Question_Template_Scale").clone().prop("id", newId1);
+			var detail = clone.find("#quest_number_").attr("id", newId2);
+			clone.appendTo("#wrapper");
+			document.getElementById(newId2).innerHTML = clicks;
+		}
+
+		function add2() {
+			clicks += 1;
+			newId1 = `Question_${clicks}`;
+			newId2 = `Number_${clicks}`;
+			/*var $myDiv = document.getElementById("question");
+			var $divClone = $myDiv.cloneNode(true);
+			document.getElementById("wrapper").appendChild($divClone); 
+			document.getElementById("clicks").innerHTML = newId;*/
+			//clone.find("#select").attr("id","select-"+length);
+			//$("#Question_1").clone().prop("id", newId).appendTo("#wrapper");
+			var clone = $("#Question_Template_Alternative").clone().prop("id", newId1);
 			var detail = clone.find("#quest_number_").attr("id", newId2);
 			clone.appendTo("#wrapper");
 			document.getElementById(newId2).innerHTML = clicks;
@@ -25,7 +40,8 @@
     <div class="container">
 		<br/><br/><br/>
       	<h3>Questionnaire Creation</h3>
-		  <button onclick="add()">Add div</button>
+		  <button onclick="add()">Add 1-5 Scale question</button>
+		  <button onclick="add2()">Add Alternative question</button>
 	    <form action="/thankyou" method="POST">
 			<div class="mb-1">
 				<label for="questName" class="form-label">Questionnaire Name</label>
@@ -35,18 +51,7 @@
 		  <br/><br/>
 		  <h5>Questions and Answers</h5>
 		  	<div id="wrapper">
-				<div id="Question_1">
-					<div class="mb-3">
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="quest_number_">1</span>
-							</div>
-							<input type="text" class="form-control" placeholder="Question"/>
-							<input type="text" class="form-control" placeholder="Answer"/>
-						</div>
-					</div>
-				</div>
-				<p>Clicks: <a id="clicks">0</a></p>
+				
 			</div>
 		  <br/><br/>
 		  <div class="mb-3 form-check">
@@ -56,7 +61,66 @@
 		  <button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--Templates for questions-->
+	<div id="Question_Template_Scale">
+		<div class="mb-3">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="quest_number_">Template</span>
+				</div>
+				<input type="text" class="form-control" placeholder="Question"/>
+				<button type="button" class="btn btn-danger" onClick="alert('do stuff'); return false;">X</button>
+			</div>
+		</div>
+	</div>
+	<div id="Question_Template_Alternative">
+		<div class="mb-3">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="quest_number_">Template</span>
+				</div>
+				<input type="text" class="form-control" placeholder="Question"/>
+				<button type="button" class="btn btn-danger" onClick="alert('do stuff'); return false;">X</button>
+			</div>
+			<div class="input-group" style="width: 50%; margin-left: 25px;">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="alternative_a">A</span>
+				</div>
+				<input type="text" class="form-control" placeholder="Question"/>
+			</div>
+			<div class="input-group" style="width: 50%; margin-left: 25px;">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="alternative_b">B</span>
+				</div>
+				<input type="text" class="form-control" placeholder="Question"/>
+			</div>
+			<div class="input-group" style="width: 50%; margin-left: 25px;">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="alternative_c">C</span>
+				</div>
+				<input type="text" class="form-control" placeholder="Question"/>
+			</div>
+			<div class="input-group" style="width: 50%; margin-left: 25px;">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="alternative_d">D</span>
+				</div>
+				<input type="text" class="form-control" placeholder="Question"/>
+			</div>
+		</div>
+	</div>
 	
 
 {% endblock %}

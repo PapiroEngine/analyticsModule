@@ -38,4 +38,7 @@ button {
     height: calc(100% - var(--topNavbarHeight));
     top: var(--topNavbarHeight);
   }
+  #Question_Template_Scale, #Question_Template_Alternative{
+    visibility: hidden !important; 
+  }
 }
