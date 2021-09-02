@@ -4,44 +4,49 @@
 {% block content %}
 	<script>
 		var clicks = 0;
-		function add() {
+		function add(type) {
 			clicks += 1;
-			newId1 = `Question_${clicks}`;
-			newId2 = `Number_${clicks}`;
-			/*var $myDiv = document.getElementById("question");
-			var $divClone = $myDiv.cloneNode(true);
-			document.getElementById("wrapper").appendChild($divClone); 
-			document.getElementById("clicks").innerHTML = newId;*/
-			//clone.find("#select").attr("id","select-"+length);
-			//$("#Question_1").clone().prop("id", newId).appendTo("#wrapper");
-			var clone = $("#Question_Template_Scale").clone().prop("id", newId1);
-			var detail = clone.find("#quest_number_").attr("id", newId2);
+			Question_New_Id = `Question_${clicks}`;
+			Question_Number = `Number_${clicks}`;
+			Button_Id = `Button_Question_${clicks}`;
+			if(type == 1)
+			{
+				var clone = $("#Question_Template_Scale").clone().prop("id", Question_New_Id);
+			}
+			else if(type == 2)
+			{
+				var clone = $("#Question_Template_Alternative").clone().prop("id", Question_New_Id);
+			}
+			clone.find("#quest_number_").attr("id", Question_Number);
+			clone.find("#Btn_Delete").attr("id", Button_Id);
 			clone.appendTo("#wrapper");
-			document.getElementById(newId2).innerHTML = clicks;
+			document.getElementById(Question_Number).innerHTML = clicks;
 		}
 
-		function add2() {
-			clicks += 1;
-			newId1 = `Question_${clicks}`;
-			newId2 = `Number_${clicks}`;
-			/*var $myDiv = document.getElementById("question");
-			var $divClone = $myDiv.cloneNode(true);
-			document.getElementById("wrapper").appendChild($divClone); 
-			document.getElementById("clicks").innerHTML = newId;*/
-			//clone.find("#select").attr("id","select-"+length);
-			//$("#Question_1").clone().prop("id", newId).appendTo("#wrapper");
-			var clone = $("#Question_Template_Alternative").clone().prop("id", newId1);
-			var detail = clone.find("#quest_number_").attr("id", newId2);
-			clone.appendTo("#wrapper");
-			document.getElementById(newId2).innerHTML = clicks;
+		function removetest(btn_id){
+			//REMOÇÂO FUNCIONAL
+			var question_number = parseInt(btn_id.replace( /^\D+/g, '')); // replace all leading non-digits with nothing
+			//alert("completo: " + btn_id + ", numero: " + question_number);
+			//alert("clicks: " + clicks + ", btn_id: " + btn_id);
+
+			document.getElementById(`Question_${question_number}`).remove();
+			for (let aux = question_number+1; aux <= clicks; aux++) {
+				aux2 = aux-1;
+				var wrapper = $("#wrapper");
+				wrapper.find(`#Question_${aux}`).attr("id", `Question_${aux2}`);
+				wrapper.find(`#Number_${aux}`).attr("id", `Number_${aux2}`);
+				wrapper.find(`#Button_Question_${aux}`).attr("id", `Button_Question_${aux2}`);
+				document.getElementById(`Number_${aux2}`).innerHTML = aux2;
+			}
+			clicks -= 1;
 		}
 	</script>
 
     <div class="container">
 		<br/><br/><br/>
       	<h3>Questionnaire Creation</h3>
-		  <button onclick="add()">Add 1-5 Scale question</button>
-		  <button onclick="add2()">Add Alternative question</button>
+		  <button onclick="add(1)">Add 1-5 Scale question</button>
+		  <button onclick="add(2)">Add Alternative question</button>
 	    <form action="/thankyou" method="POST">
 			<div class="mb-1">
 				<label for="questName" class="form-label">Questionnaire Name</label>
@@ -75,6 +80,7 @@
 
 
 	<!--Templates for questions-->
+	<!--1-5 Scale Question-->
 	<div id="Question_Template_Scale">
 		<div class="mb-3">
 			<div class="input-group">
@@ -82,10 +88,12 @@
 					<span class="input-group-text" id="quest_number_">Template</span>
 				</div>
 				<input type="text" class="form-control" placeholder="Question"/>
-				<button type="button" class="btn btn-danger" onClick="alert('do stuff'); return false;">X</button>
+				<button id="Btn_Delete" type="button" class="btn btn-danger" onClick="removetest(this.id); return false;">X</button>
 			</div>
 		</div>
 	</div>
+
+	<!--Alternative Question-->
 	<div id="Question_Template_Alternative">
 		<div class="mb-3">
 			<div class="input-group">
@@ -93,7 +101,7 @@
 					<span class="input-group-text" id="quest_number_">Template</span>
 				</div>
 				<input type="text" class="form-control" placeholder="Question"/>
-				<button type="button" class="btn btn-danger" onClick="alert('do stuff'); return false;">X</button>
+				<button id="Btn_Delete" type="button" class="btn btn-danger" onClick="removetest(this.id); return false;">X</button>
 			</div>
 			<div class="input-group" style="width: 50%; margin-left: 25px;">
 				<div class="input-group-prepend">
