@@ -5,7 +5,7 @@
 	<script>
 		var clicks = 0;
 		function add(type) {
-			clicks += 1;
+			clicks += 1; $("#ClickCounter").attr("value",clicks)
 			Question_New_Id = `Question_${clicks}`;
 			Question_Number = `Number_${clicks}`;
 			Button_Id = `Button_Question_${clicks}`;
@@ -16,9 +16,14 @@
 			else if(type == 2)
 			{
 				var clone = $("#Question_Template_Alternative").clone().prop("id", Question_New_Id);
+				clone.find("#alternative_a").attr("name", "AlternativeA_" + Question_New_Id);
+				clone.find("#alternative_b").attr("name", "AlternativeB_" + Question_New_Id);
+				clone.find("#alternative_c").attr("name", "AlternativeC_" + Question_New_Id);
+				clone.find("#alternative_d").attr("name", "AlternativeD_" + Question_New_Id);
 			}
 			clone.find("#quest_number_").attr("id", Question_Number);
 			clone.find("#Btn_Delete").attr("id", Button_Id);
+			clone.find("#questionTBox").attr("name", "textBox_" + Question_New_Id); //teste
 			clone.appendTo("#wrapper");
 			document.getElementById(Question_Number).innerHTML = clicks;
 		}
@@ -38,7 +43,7 @@
 				wrapper.find(`#Button_Question_${aux}`).attr("id", `Button_Question_${aux2}`);
 				document.getElementById(`Number_${aux2}`).innerHTML = aux2;
 			}
-			clicks -= 1;
+			clicks -= 1; $("#ClickCounter").attr("value",clicks)
 		}
 	</script>
 
@@ -52,8 +57,8 @@
 				<label for="questName" class="form-label">Questionnaire Name</label>
 				<input type="text" class="form-control" id="questionnaireName" name="questname">
 				<div id="questNameInfo" class="form-text">That's the name you will see while chosing a questionnaire to your created game.</div>
+				<input type="text" id="ClickCounter" name="ClickCounter" style="visibility: hidden;"> <!--Aux just to get clicks-->
 			</div>
-		  <br/><br/>
 		  <h5>Questions and Answers</h5>
 		  	<div id="wrapper">
 				
@@ -87,7 +92,7 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="quest_number_">Template</span>
 				</div>
-				<input type="text" class="form-control" placeholder="Question"/>
+				<input type="text" id="questionTBox" class="form-control" placeholder="Question"/>
 				<button id="Btn_Delete" type="button" class="btn btn-danger" onClick="removetest(this.id); return false;">X</button>
 			</div>
 		</div>
@@ -100,32 +105,32 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="quest_number_">Template</span>
 				</div>
-				<input type="text" class="form-control" placeholder="Question"/>
+				<input type="text" id="questionTBox" class="form-control" placeholder="Question"/>
 				<button id="Btn_Delete" type="button" class="btn btn-danger" onClick="removetest(this.id); return false;">X</button>
 			</div>
 			<div class="input-group" style="width: 50%; margin-left: 25px;">
 				<div class="input-group-prepend">
-					<span class="input-group-text" id="alternative_a">A</span>
+					<span class="input-group-text">A</span>
 				</div>
-				<input type="text" class="form-control" placeholder="Question"/>
+				<input type="text" class="form-control" id="alternative_a" placeholder="Choose alternative A"/>
 			</div>
 			<div class="input-group" style="width: 50%; margin-left: 25px;">
 				<div class="input-group-prepend">
-					<span class="input-group-text" id="alternative_b">B</span>
+					<span class="input-group-text">B</span>
 				</div>
-				<input type="text" class="form-control" placeholder="Question"/>
+				<input type="text" class="form-control" id="alternative_b" placeholder="Choose alternative B"/>
 			</div>
 			<div class="input-group" style="width: 50%; margin-left: 25px;">
 				<div class="input-group-prepend">
-					<span class="input-group-text" id="alternative_c">C</span>
+					<span class="input-group-text">C</span>
 				</div>
-				<input type="text" class="form-control" placeholder="Question"/>
+				<input type="text" class="form-control" id="alternative_c" placeholder="Choose alternative C"/>
 			</div>
 			<div class="input-group" style="width: 50%; margin-left: 25px;">
 				<div class="input-group-prepend">
-					<span class="input-group-text" id="alternative_d">D</span>
+					<span class="input-group-text">D</span>
 				</div>
-				<input type="text" class="form-control" placeholder="Question"/>
+				<input type="text" class="form-control" id="alternative_d" placeholder="Choose alternative D"/>
 			</div>
 		</div>
 	</div>
