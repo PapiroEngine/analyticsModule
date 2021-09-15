@@ -22,7 +22,6 @@ def messageReceptor():
         message = sub1.get_message()
         if(message == None):
             sleep(5)
-            print("Nadinha")
         else:
             sleep(3)
             print(message)
