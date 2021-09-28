@@ -16,7 +16,7 @@ api = Api(app)
 
 
 create_dash_app(app)
-threading.Thread(target=redis_sub.messageReceptor).start()
+#threading.Thread(target=redis_sub.messageReceptor).start()
 
 #General DB path
 myclient = pymongo.MongoClient("mongodb+srv://admin:12209005@main-learninganalyticsc.kgwfb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", ssl=True,ssl_cert_reqs='CERT_NONE')
@@ -27,9 +27,9 @@ mycol = mydb["Questionnaire_Templates"]
 def login():
 	return render_template("login.html")
 
-@app.route('/developer_screen')
-def developer_screen():
-	return render_template("developer_screen.html")
+#@app.route('/developer_screen')
+#def developer_screen():
+#	return render_template("developer_screen.html")
 
 @app.route('/dash_presentation')
 def dash_presentation():
@@ -43,8 +43,8 @@ def form():
 def thankyou():
     clicks = request.form.get("ClickCounter")
     senha = request.form.get("clicks")
-    info = {}
-    jsonString = "[{"
+    questTitle = request.form.get("questname")
+    jsonString = "{\"questions\":["
     for click in range(int(clicks)):
         question = request.form.get("textBox_Question_" + str(click+1))
         altA = request.form.get("AlternativeA_Question_" + str(click+1))
@@ -57,7 +57,7 @@ def thankyou():
             "questionText": question,
             "type": "Scale"
             }
-            jsonString += ("\"question\":\"" + question + "\",\"type\":\"Scale\",")
+            jsonString += ("{\"question\":\"" + question + "\",\"type\":\"Scale\"},")
         else:
             info = {
             "questionNumber": str(click+1),
@@ -67,12 +67,12 @@ def thankyou():
             }
             jsonString += ("{\"question\":\"" + question + ":\",\"type\":\"Alternative\",\"alternatives\":[{\"alternative\":\"" + altA + "\"},{\"alternative\":\"" + altB + "\"},{\"alternative\":\"" + altC + "\"},{\"alternative\":\"" + altD + "\"}]},")
     jsonString = jsonString[:-1]
-    jsonString += "]"
+    jsonString += "],\"questionnaireTitle\":\"" + questTitle + "\",\"Creator_Id\":\"" + "TestePlataforma" + "\"}"
 
-    #datateste = load(jsonString)
-    data = loads(jsonString)
-    mycol.insert_many(data)
+
     print(jsonString)
+    data = loads(jsonString)
+    mycol.insert_one(data)
     return render_template("thankyou.html", email=jsonString, senha=senha)
 
 
@@ -81,13 +81,12 @@ def thankyou():
 auth_token = "LDhkmZP2tkXBTmrB4TNjKQQtXftJBJT337YZVumerK4ensx6Z4afxLy3kuQPJZGFEqW7jnLNYJFYKefbWUhp24MtzGa5T2fDg3Nvnp3DfPXhc27cW7kXZQ3SpJ2XGMxv"
 
 class Teste(Resource):
-    def get(self, questType, auth):
+    def get(self, creatorID, auth):
         if auth != auth_token:
             return False
         else:
-            a = mycol.find({"$or":[{"Creator_Id":questType}, {"Creator_Id":"Template"}]},{"_id": 0})
+            a = mycol.find({"$or":[{"Creator_Id":creatorID}, {"Creator_Id":"Template"}]},{"_id": 0})
             b = jsonify(list(a))
-            #b.headers.add("Access-Control-Allow-Origin", "*")
             return b
 
-api.add_resource(Teste, '/questionnaires/templates/<questType>/<auth>')
+api.add_resource(Teste, '/questionnaires/templates/<creatorID>/<auth>')

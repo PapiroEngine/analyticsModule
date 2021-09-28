@@ -14,10 +14,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet/style.css') }}" />
     <title>Papiro - Analytics</title>
   </head>
-  <body>
+  <body style="background-color: #404E5C">
     <!-- top navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="background-color: #404E5C !important; border-bottom:medium solid #B6BFCD;">
+      <div class="container-fluid" style="background-color: #404E5C;">
         <button
           class="navbar-toggler"
           type="button"
@@ -27,11 +27,9 @@
         >
           <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
         </button>
-        <a
-          class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
-          href="#"
-          >Papiro Analytics Module</a
-        >
+        <a class="navbar-brand me-auto ms-lg-0 ms-3 fw-bold" href="#">
+          Stats and Insigths
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -76,78 +74,65 @@
       class="offcanvas offcanvas-start sidebar-nav bg-dark"
       tabindex="-1"
       id="sidebar"
+      style="border-color: #B6BFCD; border-width: medium;"
     >
-      <div class="offcanvas-body p-0">
+      <div class="offcanvas-body p-0" style="background-color: #404E5C;">
         <nav class="navbar-dark">
           <ul class="navbar-nav">
-            <li>
-              <div class="text-muted small fw-bold text-uppercase px-3">
-                CORE
-              </div>
+            <li style="margin: 0 20px;">
+              <img src="{{ url_for('static', filename='imagens/LogoPapiro.png') }}" width="40" height="40" alt="">
             </li>
-            <li>
-              <a href="/developer_screen" class="nav-link px-3 active">
-                <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-                <span>Main Page</span>
+            <br/>
+            <!-- LI menus start-->
+            <li style="margin: 0 10px;">
+              <a href="/dash_presentation" class="nav-link px-3 active">
+                <span class="me-2"><i class="bi bi-house-door"></i></span>
+                <span>Home</span>
               </a>
             </li>
-            <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
-            <li>
-              <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
-                Interface
-              </div>
-            </li>
-            <li>
-              <a
-                class="nav-link px-3 sidebar-link"
-                data-bs-toggle="collapse"
-                href="#layouts"
-              >
-                <span class="me-2"><i class="bi bi-layout-split"></i></span>
-                <span>Layouts</span>
-                <span class="ms-auto">
-                  <span class="right-icon">
-                    <i class="bi bi-chevron-down"></i>
-                  </span>
-                </span>
-              </a>
-              <div class="collapse" id="layouts">
-                <ul class="navbar-nav ps-3">
-                  <li>
-                    <a href="#" class="nav-link px-3">
-                      <span class="me-2"
-                        ><i class="bi bi-speedometer2"></i
-                      ></span>
-                      <span>Dashboard</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <a href="#" class="nav-link px-3">
-                <span class="me-2"><i class="bi bi-book-fill"></i></span>
-                <span>Pages</span>
+            <li style="margin: 0 10px;">
+              <a href="/dash_presentation" class="nav-link px-3 active">
+                <span class="me-2"><i class="bi bi-hash"></i></span>
+                <span>Explore</span>
               </a>
             </li>
-            <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
-            <li>
-              <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
-                Addons
-              </div>
-            </li>
-            <li>
-              <a href="#" class="nav-link px-3">
-                <span class="me-2"><i class="bi bi-graph-up"></i></span>
-                <span>Charts</span>
+            <li style="margin: 0 10px;">
+              <a href="/dash_presentation" class="nav-link px-3 active">
+                <span class="me-2"><i class="bi bi-bar-chart"></i></span>
+                <span>Analytics</span>
               </a>
             </li>
-            <li>
-              <a href="#" class="nav-link px-3">
-                <span class="me-2"><i class="bi bi-table"></i></span>
-                <span>TablesOnOtherPage</span>
+            <li style="margin: 0 10px;">
+              <a href="/dash_presentation" class="nav-link px-3 active">
+                <span class="me-2"><i class="bi bi-check-circle"></i></span>
+                <span>Quizzes</span>
               </a>
             </li>
+            <li style="margin: 0 10px;">
+              <a href="/dash_presentation" class="nav-link px-3 active">
+                <span class="me-2"><i class="bi bi-bookmarks"></i></span>
+                <span>Library</span>
+              </a>
+            </li>
+            <li style="margin: 0 10px;">
+              <a href="/dash_presentation" class="nav-link px-3 active">
+                <span class="me-2"><i class="bi bi-journal-text"></i></span>
+                <span>Lists</span>
+              </a>
+            </li>
+            <li style="margin: 0 10px;">
+              <a href="/dash_presentation" class="nav-link px-3 active">
+                <span class="me-2"><i class="bi bi-person"></i></span>
+                <span>Profile</span>
+              </a>
+            </li>
+            <li style="margin: 0 10px;">
+              <a href="/dash_presentation" class="nav-link px-3 active">
+                <span class="me-2"><i class="bi bi-house-door"></i></span>
+                <span>More</span>
+              </a>
+            </li>
+            <!-- LI menus end-->
           </ul>
         </nav>
       </div>
