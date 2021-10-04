@@ -6,30 +6,30 @@ import pymongo
 from json import loads
 from flask_cors import CORS
 import threading
-from time import sleep
 import redis_sub
 
+
+
+#App init
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
-
-
-
 create_dash_app(app)
-#threading.Thread(target=redis_sub.messageReceptor).start()
+threading.Thread(target=redis_sub.messageReceptor).start()
+
+
 
 #General DB path
 myclient = pymongo.MongoClient("mongodb+srv://admin:12209005@main-learninganalyticsc.kgwfb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", ssl=True,ssl_cert_reqs='CERT_NONE')
 mydb = myclient["Papiro_Statistics_DB"]
 mycol = mydb["Questionnaire_Templates"]
 
+
+
+#Website screens
 @app.route('/')
 def login():
 	return render_template("login.html")
-
-#@app.route('/developer_screen')
-#def developer_screen():
-#	return render_template("developer_screen.html")
 
 @app.route('/dash_presentation')
 def dash_presentation():
@@ -52,23 +52,12 @@ def thankyou():
         altC = request.form.get("AlternativeC_Question_" + str(click+1))
         altD = request.form.get("AlternativeD_Question_" + str(click+1))
         if(not altA): #Checa se altA está em vazio para decidir se é questão de escala ou alternativa
-            info = {
-            "questionNumber": str(click+1),
-            "questionText": question,
-            "type": "Scale"
-            }
             jsonString += ("{\"question\":\"" + question + "\",\"type\":\"Scale\"},")
         else:
-            info = {
-            "questionNumber": str(click+1),
-            "questionText": question,
-            "type": "Alternative",
-            "alternatives": [altA,altB,altC,altD],
-            }
             jsonString += ("{\"question\":\"" + question + ":\",\"type\":\"Alternative\",\"alternatives\":[{\"alternative\":\"" + altA + "\"},{\"alternative\":\"" + altB + "\"},{\"alternative\":\"" + altC + "\"},{\"alternative\":\"" + altD + "\"}]},")
+    
     jsonString = jsonString[:-1]
     jsonString += "],\"questionnaireTitle\":\"" + questTitle + "\",\"Creator_Id\":\"" + "TestePlataforma" + "\"}"
-
 
     print(jsonString)
     data = loads(jsonString)
@@ -77,12 +66,10 @@ def thankyou():
 
 
 
-
-auth_token = "LDhkmZP2tkXBTmrB4TNjKQQtXftJBJT337YZVumerK4ensx6Z4afxLy3kuQPJZGFEqW7jnLNYJFYKefbWUhp24MtzGa5T2fDg3Nvnp3DfPXhc27cW7kXZQ3SpJ2XGMxv"
-
+#API that sends questionnaires to the Developer module
 class Teste(Resource):
     def get(self, creatorID, auth):
-        if auth != auth_token:
+        if auth != "LDhkmZP2tkXBTmrB4TNjKQQtXftJBJT337YZVumerK4ensx6Z4afxLy3kuQPJZGFEqW7jnLNYJFYKefbWUhp24MtzGa5T2fDg3Nvnp3DfPXhc27cW7kXZQ3SpJ2XGMxv":
             return False
         else:
             a = mycol.find({"$or":[{"Creator_Id":creatorID}, {"Creator_Id":"Template"}]},{"_id": 0})
