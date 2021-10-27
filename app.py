@@ -77,3 +77,15 @@ class Teste(Resource):
             return b
 
 api.add_resource(Teste, '/questionnaires/templates/<creatorID>/<auth>')
+
+
+######################################################################
+
+@app.route('/home')
+def home():
+	return render_template("home.html")
+
+
+@app.route('/explore')
+def explore():
+	return render_template("explore.html")
