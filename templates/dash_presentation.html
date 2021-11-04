@@ -2,6 +2,26 @@
 
 {% block content %}
 
+
+<script src="{{ url_for('static', filename='javascript/jquery-3.5.1.js') }}"></script>
+
+<style>
+  #nav-list a{
+    color: #fff;
+  }
+  
+  #nav-list .active{
+    background-color: #404E5C;
+    color: #F8BA63;
+    border: none;
+    border-bottom: 3px solid #074EE8;
+  }
+
+  #nav-list a,li:hover{
+    border: none;
+  }
+  
+</style>
     <!--
     <div class="container">
       <h1>About the project</h1>
@@ -14,11 +34,83 @@
       </p>
     </div>
     -->
-    <main class="mt-5 pt-3">
-       <div>
+    <div class="row mt-2">
+      <div class="col">
         <iframe class="responsive-iframe" src="dashboardOrigin" height="590px" width="100%"></iframe>
       </div>
-      <table class="table">
+    </div>
+    <div class="row">
+      
+      <ul class="nav nav-tabs nav-justified" role="tablist" id="nav-list">
+        <li class="nav-item" >
+          <a class="nav-link d-flex flex-column active" href="#plays_tab" data-bs-toggle="tab" role="tab" data-bs-target="#plays_tab">
+            <i class="bi bi-play h3 mb-0"></i>
+            Plays
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex flex-column" href="#players_tab" data-bs-toggle="tab" data-bs-target="#players_tab">
+            <i class="bi bi-people h3 mb-0"></i>
+            Players
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex flex-column " href="#hours_game_tab" data-bs-toggle="tab" data-bs-target="#hours_game_tab">
+            <i class="bi bi-clock h3 mb-0"></i>
+            Hours/game
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex flex-column " href="#rating_tab" data-bs-toggle="tab" data-bs-target="#rating_tab">
+            <i class="bi bi-star h3 mb-0 "></i>
+            Ratings
+          </a>
+        </li>
+      </ul>
+
+      <div class="row">
+        <div class="col">
+          <div class="tab-content">
+            <div class="tab-pane active" id="plays_tab">
+              <h3>tab 1</h3>
+              Plays tab
+            </div>
+            <div class="tab-pane" id="players_tab">
+              <h3>tab 222</h3>
+              Players tab
+            </div>
+            <div class="tab-pane" id="hours_game_tab">
+              <h3>tab 3333</h3>
+              Hours/game tab
+            </div>
+            <div class="tab-pane" id="rating_tab">
+              <h3>tab 4</h3>
+              Ratings tab
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <main class="">
+       <div>
+        <!-- <iframe class="responsive-iframe" src="dashboardOrigin" height="590px" width="100%"></iframe> -->
+      </div>
+      <!-- <table class="table">
         <thead class="table-dark">
           <tr>
             <th scope="col">#</th>
@@ -84,7 +176,7 @@
           </tr>
         </tbody>
       </table>
-    </main>
+    </main> -->
     
 
 {% endblock %}

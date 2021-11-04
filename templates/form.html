@@ -47,30 +47,33 @@
 		}
 	</script>
 
-    <div class="container" style="background-color: lightgreen;">
-		<br/><br/><br/>
-      	<h3>Questionnaire Creation</h3>
-		  <button onclick="add(1)">Add 1-5 Scale question</button>
-		  <button onclick="add(2)">Add Alternative question</button>
-	    <form action="/thankyou" method="POST">
-			<div class="mb-1">
-				<label for="questName" class="form-label">Questionnaire Name</label>
-				<input type="text" class="form-control" id="questionnaireName" name="questname">
-				<div id="questNameInfo" class="form-text">That's the name you will see while chosing a questionnaire to your created game.</div>
-				<input type="text" id="ClickCounter" name="ClickCounter" style="visibility: hidden;"> <!--Aux just to get clicks-->
+	<div class="row d-flex justify-content-center text-light">
+		<div class="col-6">
+			<div class="container mt-4">
+				  <h3>Questionnaire Creation</h3>
+				  <button class="btn btn-warning" onclick="add(1)">Add 1-5 Scale question</button>
+				  <button class="btn btn-warning" onclick="add(2)">Add Alternative question</button>
+				<form action="/thankyou" method="POST">
+					<div class="mb-1">
+						<label for="questName" class="form-label">Questionnaire Name</label>
+						<input type="text" class="form-control" id="questionnaireName" name="questname">
+						<div id="questNameInfo" class="form-text">That's the name you will see while chosing a questionnaire to your created game.</div>
+						<input type="text" id="ClickCounter" name="ClickCounter" style="visibility: hidden;"> <!--Aux just to get clicks-->
+					</div>
+					<div id="wrapper">
+						<h5>Questions and Answers</h5>
+						
+					</div>
+				  <!-- <div class="mb-3 form-check">
+					<input type="checkbox" class="form-check-input" id="exampleCheck1">
+					<label class="form-check-label" for="exampleCheck1">Check me out</label>
+				  </div> -->
+				  <button type="submit" class="btn btn-primary">Submit</button>
+				</form>
 			</div>
-		  <h5>Questions and Answers</h5>
-		  	<div id="wrapper">
-				
-			</div>
-		  <br/><br/>
-		  <div class="mb-3 form-check">
-		    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-		    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-		  </div>
-		  <button type="submit" class="btn btn-primary">Submit</button>
-		</form>
+		</div>
 	</div>
+    
 
 
 
