@@ -42,3 +42,36 @@ button {
     visibility: hidden !important; 
   }
 }
+
+
+
+#nav-list a {
+  color: #fff;
+}
+
+#nav-list .active {
+  background-color: #404E5C;
+  color: #F8BA63;
+  border: none;
+  border-bottom: 3px solid #074EE8;
+}
+
+#nav-list a, li:hover {
+  border: none;
+}
+
+table, th, td {
+  border: none;
+}
+
+
+#myTable {
+  border: 2px solid #5A6A87;
+}
+
+#myTable a {
+  text-decoration: none;
+  color: #E1AC62;
+  font-size: 1.3em;
+  font-weight: bold;
+}
