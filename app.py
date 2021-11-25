@@ -89,3 +89,7 @@ def home():
 @app.route('/explore')
 def explore():
 	return render_template("explore.html")
+
+@app.route('/quizes')
+def quizes():
+	return render_template("quizes.html")
