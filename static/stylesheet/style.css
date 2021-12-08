@@ -6,6 +6,7 @@ button {
 :root {
   --offcanvas-width: 270px;
   --topNavbarHeight: 56px;
+  --main-orange-color: #F8BA63;
 }
 .sidebar-nav {
   width: var(--offcanvas-width);
@@ -43,7 +44,9 @@ button {
   }
 }
 
-
+.myButton{
+  background-color: var(--main-orange-color);
+}
 
 #nav-list a {
   color: #fff;
@@ -74,4 +77,8 @@ table, th, td {
   color: #E1AC62;
   font-size: 1.3em;
   font-weight: bold;
+}
+
+.modal-content{
+  background-color: #404E5C;
 }

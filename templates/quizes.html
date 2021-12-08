@@ -2,8 +2,69 @@
 
 {% block content %}
 
+<script>
+    var clicks = 0;
+    let questionsAmmount = 0;
+    function add(type) {
+        questionsAmmount += 1;
+        if (questionsAmmount > 0) document.getElementById("wrapper").style.visibility = 'visible';
+        clicks += 1; $("#ClickCounter").attr("value", clicks)
+        Question_New_Id = `Question_${clicks}`;
+        Question_Number = `Number_${clicks}`;
+        Button_Id = `Button_Question_${clicks}`;
+        if (type == 1) {
+            var clone = $("#Question_Template_Scale").clone().prop("id", Question_New_Id);
+        }
+        else if (type == 2) {
+            var clone = $("#Question_Template_Alternative").clone().prop("id", Question_New_Id);
+            clone.find("#alternative_a").attr("name", "AlternativeA_" + Question_New_Id);
+            clone.find("#alternative_b").attr("name", "AlternativeB_" + Question_New_Id);
+            clone.find("#alternative_c").attr("name", "AlternativeC_" + Question_New_Id);
+            clone.find("#alternative_d").attr("name", "AlternativeD_" + Question_New_Id);
+        }
+        clone.find("#quest_number_").attr("id", Question_Number);
+        clone.find("#Btn_Delete").attr("id", Button_Id);
+        clone.find("#questionTBox").attr("name", "textBox_" + Question_New_Id); //teste
+        clone.appendTo("#wrapper");
+        document.getElementById(Question_Number).innerHTML = clicks;
+    }
+
+    function removetest(btn_id) {
+        questionsAmmount -= 1;
+        if (questionsAmmount <= 0) document.getElementById("wrapper").style.visibility = 'hidden';
+        //REMOÇÂO FUNCIONAL
+        var question_number = parseInt(btn_id.replace(/^\D+/g, '')); // replace all leading non-digits with nothing
+        //alert("completo: " + btn_id + ", numero: " + question_number);
+        //alert("clicks: " + clicks + ", btn_id: " + btn_id);
+
+        document.getElementById(`Question_${question_number}`).remove();
+        for (let aux = question_number + 1; aux <= clicks; aux++) {
+            aux2 = aux - 1;
+            var wrapper = $("#wrapper");
+            wrapper.find(`#Question_${aux}`).attr("id", `Question_${aux2}`);
+            wrapper.find(`#Number_${aux}`).attr("id", `Number_${aux2}`);
+            wrapper.find(`#Button_Question_${aux}`).attr("id", `Button_Question_${aux2}`);
+            document.getElementById(`Number_${aux2}`).innerHTML = aux2;
+        }
+        clicks -= 1; $("#ClickCounter").attr("value", clicks)
+    }
+</script>
+
+<style>
+    .modal-body  input{
+        border-radius: 20px;
+        border: 3px solid #5A6A87;
+        background-color: #404E5C;
+        color: #fff;
+    }
+    .modal-body  input:focus{
+        background-color: #404E5C;
+        color: #fff;
+    }
+</style>
+
 <div class="col">
-    
+
     <div class="row mt-3">
         <div class="col">
 
@@ -11,10 +72,10 @@
         </div>
         <div class="col d-flex justify-content-center">
 
-            <button class="btn btn-primary">Add Questionnaire</button>
+            <button class="btn myButton" data-bs-toggle="modal" data-bs-target="#siteModal">Add Questionnaire</button>
         </div>
     </div>
-    
+
     <div class="row mt-5">
         <div class="col">
 
@@ -24,7 +85,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Game 1</h5>
                     <hr>
-                   
+
                     <div class="row">
                         <div class="col d-flex justify-content-center align-items-center">
                             <i class="bi bi-trash h3"></i>
@@ -40,7 +101,8 @@
 
 
         </div>
-        <div class="col"> <!-- Page content -->
+        <div class="col">
+            <!-- Page content -->
 
 
             <div class="card mt-5 " style="width: 20rem;">
@@ -71,7 +133,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Game 1</h5>
                     <hr>
-                
+
                     <div class="row">
                         <div class="col d-flex justify-content-center align-items-center">
                             <i class="bi bi-trash h3"></i>
@@ -87,6 +149,111 @@
 
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" id="siteModal">
+        <div class="modal-dialog modal-lg">
+
+            <div class="modal-content text-light">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Questionnaire Creation</h5>
+                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <!-- <p>Modal body text goes here.</p> -->
+
+                    <div class="container-fluid">
+                        <button class="btn myButton" onclick="add(1)">Add 1-5 Scale question</button>
+                        <button class="btn myButton" onclick="add(2)">Add Alternative question</button>
+                        <form action="">
+                            <label for="questName" class="form-label">Questionnaire Name</label>
+                            <input type="text" class="form-control" id="questionnaireName" name="questname">
+                            <div id="questNameInfo" class="form-text">That's the name you will see while chosing a
+                                questionnaire to your created game.</div>
+                            <input type="text" id="ClickCounter" name="ClickCounter" style="visibility: hidden;">
+                            <!--Aux just to get clicks-->
+
+                            <div id="wrapper" style="visibility: hidden;">
+                                <h5>Questions and Answers</h5>
+
+                            </div>
+                        </form>
+                    </div>
+
+
+
+                    <!--Templates for questions-->
+                    <!--1-5 Scale Question-->
+                    <div id="Question_Template_Scale">
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="quest_number_">Template</span>
+                                </div>
+                                <input type="text" id="questionTBox" class="form-control" placeholder="Question" />
+                                <button id="Btn_Delete" type="button" class="btn btn-danger"
+                                    onClick="removetest(this.id); return false;">X</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--Alternative Question-->
+                    <div id="Question_Template_Alternative">
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="quest_number_">Template</span>
+                                </div>
+                                <input type="text" id="questionTBox" class="form-control" placeholder="Question" />
+                                <button id="Btn_Delete" type="button" class="btn btn-danger"
+                                    onClick="removetest(this.id); return false;">X</button>
+                            </div>
+                            <div class="input-group" style="width: 50%; margin-left: 25px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">A</span>
+                                </div>
+                                <input type="text" class="form-control" id="alternative_a"
+                                    placeholder="Choose alternative A" />
+                            </div>
+                            <div class="input-group" style="width: 50%; margin-left: 25px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">B</span>
+                                </div>
+                                <input type="text" class="form-control" id="alternative_b"
+                                    placeholder="Choose alternative B" />
+                            </div>
+                            <div class="input-group" style="width: 50%; margin-left: 25px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">C</span>
+                                </div>
+                                <input type="text" class="form-control" id="alternative_c"
+                                    placeholder="Choose alternative C" />
+                            </div>
+                            <div class="input-group" style="width: 50%; margin-left: 25px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">D</span>
+                                </div>
+                                <input type="text" class="form-control" id="alternative_d"
+                                    placeholder="Choose alternative D" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                    <button type="button" class="btn myButton ">Submit</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 
